@@ -1,4 +1,5 @@
-Server setup I've run for a few Drupal 8 sites I'm running. New to doing this, the following is some what I've learned in the last few months.
+LAMP Server setup I've run for a few Drupal 8 sites.
+New to doing this, the following is some what I've learned in the last few months.
 
 --Update and upgrade Ubuntu--
 sudo apt-get update
