@@ -1,7 +1,5 @@
-##PHP7 Server setup
-Like my first server setup file, I'm still new to doing this
-so use this at own risk. All information I've just compiled
-searching the net.
+PHP7 Server setup
+Like my first server setup file, I'm still new to doing this so use this at own risk. All information I've just compiled searching the net.
 
 --Update and upgrade Ubuntu--
 sudo apt-get update
