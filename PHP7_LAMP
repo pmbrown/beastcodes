@@ -1,6 +1,6 @@
-# PHP7 Server setup
+## PHP7 Server setup
 ## I'm still new to doing this so use this at own risk.
-### All information is compiled from searching the net.
+## All information is compiled from searching the net.
 
 --Update and upgrade Ubuntu--
 sudo apt-get update
@@ -19,7 +19,7 @@ sudo apt-get install python-software-properties
 sudo apt-get update
 
 --PHP7 install--
-// I did these line by line so I could see any messages regarding each element as it installed.
+## I did these line by line so I could see any messages regarding each element as it installed.
 
 sudo add-apt-repository ppa:ondrej/php
 sudo apt-get update
@@ -53,22 +53,20 @@ sudo mysql_secure_installation
 sudo service mysql restart
 
 --fail2ban install--
-// I installed this afterwards after recommendation from a friend.
-// I'm guessing this is probably a good install to have at the start
-
+## I installed this afterwards after recommendation from a friend.
+## I'm guessing this is probably a good install to have at the start
 sudo apt-get install fail2ban
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
 
-// Edit jail.local file, set Apache values from false to true.
-// I've also added [apache-auth] and [apache-badbots] to the file.
-
+## Edit jail.local file, set Apache values from false to true.
+## I've also added [apache-auth] and [apache-badbots] to the file.
 sudo /etc/init.d/fail2ban restart
 sudo apt-get update
 
 --Update, upgrade and reboot--
-// This probably isn't necessary but I figure it can't hurt. 
-// I include because on my second access to server the system
-// told me there were upgrades available and a system reboot required.
+## This probably isn't necessary but I figure it can't hurt. 
+## I include because on my second access to server the system
+## told me there were upgrades available and a system reboot required.
 
 sudo apt-get update
 sudo apt-get upgrade -y
