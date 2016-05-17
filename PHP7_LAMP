@@ -1,6 +1,6 @@
-PHP7 Server setup
-I'm still new to doing this so use this at own risk.
-All information is compiled from searching the net.
+# PHP7 Server setup
+## I'm still new to doing this so use this at own risk.
+### All information is compiled from searching the net.
 
 --Update and upgrade Ubuntu--
 sudo apt-get update
