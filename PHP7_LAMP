@@ -50,6 +50,14 @@ sudo apt-get install mysql-server-5.6
 sudo mysql_secure_installation
 sudo service mysql restart
 
+--fail2ban install--
+sudo apt-get install fail2ban
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+// Edit jail.local file, set Apache values from false to true.
+// I've also added [apache-auth] and [apache-badbots] to the file.
+sudo /etc/init.d/fail2ban restart
+sudo apt-get update
+
 --Update, upgrade and reboot--
 // This probably isn't necessary but I figure it can't hurt. 
 // I include because on my second access to server the system
