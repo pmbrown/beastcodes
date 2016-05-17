@@ -1,0 +1,65 @@
+##PHP7 Server setup
+Like my first server setup file, I'm still new to doing this
+so use this at own risk. All information I've just compiled
+searching the net.
+
+--Update and upgrade Ubuntu--
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get autoremove -y
+
+--Apache install--
+sudo apt-get install apache2 -y
+sudo apt-get install apache2-utils -y
+sudo service apache2 restart
+
+--Misc--
+sudo apt-get install -y language-pack-en-base
+sudo apt-get install python-software-properties
+sudo apt-get update
+
+--PHP7 install--
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install -y php7.0
+*sudo apt-get install php7.0-cli
+sudo apt-get install php7.0-fpm
+sudo apt-get install php7.0-gd
+*sudo apt-get install php7.0-json
+sudo apt-get install php7.0-mysql
+*sudo apt-get install php7.0-readline
+*sudo apt-get install libapache2-mod-php7.0
+sudo apt-get install php7.0-curl
+sudo apt-get install php7.0-mcrypt
+*sudo apt-get install php7.0-opcache
+sudo apt-get install php-ssh2
+sudo apt-get install php-zip
+sudo apt-get install php-http
+sudo apt-get install php7.0-xml
+
+* All of these messaged that they were already the newest version and didn't appear to be required
+in the installation. I use a apt-get autoremove at end which gets rid of anything extra they install
+that is no longer required.
+
+--Drupal enables--
+sudo phpenmod -v 7.0 mcrypt
+sudo a2enmod rewrite headers
+sudo service apache2 restart
+
+--MySQL install--
+sudo apt-get install mysql-server-5.6
+sudo mysql_secure_installation
+sudo service mysql restart
+
+--Update, upgrade and reboot--
+// This probably isn't necessary but I figure it can't hurt.
+// I include because on my second access to server the
+// system told me there were upgrades available and a system reboot required.
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get autoremove -y
+sudo reboot
+
+Good luck.
