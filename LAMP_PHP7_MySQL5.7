@@ -1,0 +1,71 @@
+// LAMP with PHP7 and MySQL5.7 and fail2ban enabled to run Drupal 8.
+
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get autoremove -y
+
+sudo apt-get install python-software-properties
+sudo apt-get update
+
+// fail2ban install
+sudo apt-get install fail2ban -y
+sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+// Edit jail.local file, set Apache values from false to true.
+// Add badbots, nohome values. php-url-fopen to true and change logpath.
+sudo /etc/init.d/fail2ban restart
+sudo apt-get update
+
+// Apache install
+sudo apt-get install apache2 -y
+sudo apt-get install apache2-utils -y
+sudo service apache2 restart
+
+// Misc
+sudo apt-get install -y language-pack-en-base -y
+sudo apt-get update
+
+// PHP install
+sudo add-apt-repository ppa:ondrej/php -y
+sudo apt-get update
+sudo apt-get install -y php7.0
+sudo apt-get install php7.0-fpm php7.0-gd php7.0-mysql php7.0-curl php7.0-mcrypt php-ssh2 php-zip php-http php7.0-xml php-raphf php-propro php-pear -y
+
+// Enables
+sudo a2enmod proxy_fcgi setenvif
+sudo service apache2 restart
+sudo a2enconf php7.0-fpm
+sudo service apache2 reload
+sudo phpenmod -v 7.0 mcrypt
+sudo a2enmod rewrite headers
+sudo service apache2 restart
+sudo apt-get update
+
+
+// MySQL install
+wget http://dev.mysql.com/get/mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
+sudo dpkg -i mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
+sudo apt-get update
+sudo apt-get install mysql-server-5.7
+sudo mysql_secure_installation
+sudo service mysql restart
+
+// Add to these to apache2.conf
+ServerSignature Off
+ServerTokens Prod
+
+<Directory /var/www/html>
+    Options -Indexes
+</Directory>
+
+sudo service apache2 restart
+
+// Probably not necessary but I do habitually
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+sudo apt-get autoremove -y
+
+// Starting up new session I'm told system needs reboot so I do so here--
+sudo reboot
+
