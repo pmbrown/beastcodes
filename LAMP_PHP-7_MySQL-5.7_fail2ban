@@ -1,4 +1,10 @@
-// LAMP with PHP7 and MySQL5.7 and fail2ban enabled to run Drupal 8.
+# LAMP with PHP-7 and MySQL-5.7 and fail2ban, enabled to run Drupal 8.
+# I started learning this stuff in February 2016, this is compiled from trawling the web.
+# My aim has been a server to run Drupal 8 and the following has been filling those needs so far.
+# The order I do everything probably isn't perfect but I'm new to CLI as well.
+# A few of the PHP installs and enables were to stop an error I was getting in a log file.
+# The fail2ban isn't necessary but I installed on recommendation from friend in hosting business. Makes sense.
+# Advice is totally welcome.
 
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -8,30 +14,34 @@ sudo apt-get autoremove -y
 sudo apt-get install python-software-properties
 sudo apt-get update
 
-// fail2ban install
+# fail2ban install - not necessary for everything to work.
+# Overview from their site: Fail2ban scans log files (e.g. /var/log/apache/error_log) and bans IPs that show the malicious signs -- too many password failures, seeking for exploits, etc. Generally Fail2Ban is then used to update firewall rules to reject the IP addresses for a specified amount of time
+
 sudo apt-get install fail2ban -y
 sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-// Edit jail.local file, set Apache values from false to true.
-// Add badbots, nohome values. php-url-fopen to true and change logpath.
+
+# Edit jail.local file, set Apache values from false to true.
+# Add badbots, nohome values. php-url-fopen to true and change logpath.
+
 sudo /etc/init.d/fail2ban restart
 sudo apt-get update
 
-// Apache install
+# Apache install
 sudo apt-get install apache2 -y
 sudo apt-get install apache2-utils -y
 sudo service apache2 restart
 
-// Misc
+# Misc
 sudo apt-get install -y language-pack-en-base
 sudo apt-get update
 
-// PHP install
+# PHP-7 install
 sudo add-apt-repository ppa:ondrej/php -y
 sudo apt-get update
 sudo apt-get install -y php7.0
 sudo apt-get install php7.0-fpm php7.0-gd php7.0-mysql php7.0-curl php7.0-mcrypt php-ssh2 php-zip php-http php7.0-xml php-raphf php-propro php-pear -y
 
-// Enables
+# Enables
 sudo a2enmod proxy_fcgi setenvif
 sudo service apache2 restart
 sudo a2enconf php7.0-fpm
@@ -41,8 +51,7 @@ sudo a2enmod rewrite headers
 sudo service apache2 restart
 sudo apt-get update
 
-
-// MySQL install
+# MySQL-5.7 install
 wget http://dev.mysql.com/get/mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
 sudo dpkg -i mysql-apt-config_0.3.2-1ubuntu14.04_all.deb
 sudo apt-get update
@@ -50,7 +59,7 @@ sudo apt-get install mysql-server-5.7
 sudo mysql_secure_installation
 sudo service mysql restart
 
-// Add to these to apache2.conf
+# Add to these to apache2.conf to hide directories and server information.
 ServerSignature Off
 ServerTokens Prod
 
@@ -60,12 +69,13 @@ ServerTokens Prod
 
 sudo service apache2 restart
 
-// Probably not necessary but I do habitually
+# Probably not really necessary but I started do a bit habitually. Like I said at start I'm new to this :)
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 sudo apt-get autoremove -y
 
-// Starting up new session I'm told system needs reboot so I do so here--
+# Starting up new session I'm told system needs reboot so I do so here
 sudo reboot
 
+# Hope this works for you, good luck :)
